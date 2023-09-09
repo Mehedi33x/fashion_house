@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('delivermen', function (Blueprint $table) {
             $table->id();
+            $table->string('id_no');
+            $table->string('image')->nullable();
+            $table->string('name');
+            $table->string('contact');
+            $table->string('email');
+            $table->text('address');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
