@@ -8,15 +8,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    //category_table
     public function categoryTable()
     {
         $category = Category::paginate(5);
         return view('backend.pages.category.category', compact('category'));
     }
+    //category_create_form
     public function categoryAdd()
     {
         return view('backend.pages.category.add_category');
     }
+    //category_create
     public function categoryStore(Request $request)
     {
         // dd($request->all());
@@ -39,6 +42,22 @@ class CategoryController extends Controller
             'status' => 'active',
             'image' => $category_image,
         ]);
+        return to_route('category.table');
+    }
+    //category_view
+    public function categoryView($id)
+    {
+
+        $category = Category::findOrFail($id);
+
+        return view('backend.pages.category.view_category', compact('category'));
+    }
+
+    //category_delete
+    public function categoryDelete($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
         return to_route('category.table');
     }
 }

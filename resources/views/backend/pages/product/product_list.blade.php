@@ -15,7 +15,6 @@
                     <th scope="col">Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
-                    <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -42,8 +41,10 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"
+                                        <a class="dropdown-item" href="{{ route('product.view', $element->id) }}"><i
+                                                class="fa fa-edit"></i>View</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>Edit</a>
+                                        <a class="dropdown-item" href="{{ route('product.delete', $element->id) }}"
                                             onclick="return confirm('Are you sure to Delete?')"><i
                                                 class="fa-solid fa-trash"></i>Delete</a>
                                     </div>

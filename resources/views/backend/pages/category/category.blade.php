@@ -33,11 +33,11 @@
                                 <div class="dropdown">
                                     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+                                        Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"
+                                        <a class="dropdown-item" href="{{ route('category.view', $element->id) }}">View</a>
+                                        <a class="dropdown-item" href="{{ route('category.delete', $element->id) }}"
                                             onclick="return confirm('Are you sure to Delete?')"><i
                                                 class="fa-solid fa-trash"></i>Delete</a>
                                     </div>
