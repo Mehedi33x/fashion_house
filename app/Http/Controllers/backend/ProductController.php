@@ -55,15 +55,31 @@ class ProductController extends Controller
     }
 
     //product view
-    public function product_view($id){
-        $product=Product::findOrFail($id);
-        return view('backend.pages.product.view_product',compact('product'));
+    public function product_view($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('backend.pages.product.view_product', compact('product'));
     }
 
     //product_delete
-    public function product_delete($id){
-        $product=Product::findOrFail($id);
+    public function product_delete($id)
+    {
+        $product = Product::findOrFail($id);
         $product->delete();
         return to_route('product.list');
+    }
+
+
+
+    //frontend
+    //all-products
+    public function allProducts()
+    {
+        $allProducts = Product::all();
+        return view('frontend.pages.product.all_products', compact('allProducts'));
+    }
+    public function singleProduct()
+    {
+        return view('frontend.pages.product.single_product');
     }
 }

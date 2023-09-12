@@ -9,8 +9,11 @@ use App\Models\Deliverman;
 use Illuminate\Support\Facades\Route;
 
 //frontend
-Route::get('/',[HomepageController::class,'home'])->name('homepage');
+Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
+
+Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
+Route::get('/product', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
 
 
 

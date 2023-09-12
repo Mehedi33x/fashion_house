@@ -1,6 +1,6 @@
 <div>
-     <!-- Start Top Header Bar -->
-     <section class="top-header">
+    <!-- Start Top Header Bar -->
+    <section class="top-header">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-4">
@@ -38,7 +38,9 @@
                                 <!-- Cart Item -->
                                 <div class="media">
                                     <a class="pull-left" href="#!">
-                                        <img class="media-object" src="{{url('/frontend/assets/images/shop/cart/cart-1.jpg')}}" alt="image" />
+                                        <img class="media-object"
+                                            src="{{ url('/frontend/assets/images/shop/cart/cart-1.jpg') }}"
+                                            alt="image" />
                                     </a>
                                     <div class="media-body">
                                         <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
@@ -53,7 +55,9 @@
                                 <!-- Cart Item -->
                                 <div class="media">
                                     <a class="pull-left" href="#!">
-                                        <img class="media-object" src="{{url('/frontend/assets/images/shop/cart/cart-2.jpg')}}" alt="image" />
+                                        <img class="media-object"
+                                            src="{{ url('/frontend/assets/images/shop/cart/cart-2.jpg') }}"
+                                            alt="image" />
                                     </a>
                                     <div class="media-body">
                                         <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
@@ -81,8 +85,8 @@
 
                         <!-- Search -->
                         <li class="dropdown search dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown"
-                                data-hover="dropdown"><i class="tf-ion-ios-search-strong"></i> Search</a>
+                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                                    class="tf-ion-ios-search-strong"></i> Search</a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
                                     <form action="post"><input type="search" class="form-control"
@@ -91,15 +95,10 @@
                             </ul>
                         </li><!-- / Search -->
 
-                        <!-- Languages -->
-                        <li class="commonSelect">
-                            <select class="form-control">
-                                <option>EN</option>
-                                <option>DE</option>
-                                <option>FR</option>
-                                <option>ES</option>
-                            </select>
-                        </li><!-- / Languages -->
+                        <!-- Login -->
+                        <li class="">
+                            <a href="http://">Login</a>
+                        </li>
 
                     </ul><!-- / .nav .navbar-nav .navbar-right -->
                 </div>
@@ -111,8 +110,8 @@
             <div class="container">
                 <div class="navbar-header">
                     <h2 class="menu-title">Main Menu</h2>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -127,12 +126,34 @@
 
                         <!-- Home -->
                         <li class="dropdown ">
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('homepage') }}">Home</a>
                         </li><!-- / Home -->
+
+                        <li class="dropdown dropdown-slide">
+                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Category
+                                <span class="tf-ion-ios-arrow-down"></span></a>
+                            <ul class="dropdown-menu">
+                                {{-- @dd($category) --}}
+                                @foreach ($category as $catData)
+                                    <li><a href="">{{ $catData->name }}</a></li>
+                                @endforeach
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('web.allproducts') }}">Products</a>
+                        </li>
+                        <li>
+                            <a href="">About Us</a>
+                        </li>
+                        <li>
+                            <a href="">Conatcat</a>
+                        </li>
 
 
                         <!-- Elements -->
-                        <li class="dropdown dropdown-slide">
+                        {{-- <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                 data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Shop
                                 <span class="tf-ion-ios-arrow-down"></span></a>
@@ -166,11 +187,11 @@
 
                                 </div><!-- / .row -->
                             </div><!-- / .dropdown-menu -->
-                        </li><!-- / Elements -->
+                        </li><!-- / Elements --> --}}
 
 
                         <!-- Pages -->
-                        <li class="dropdown full-width dropdown-slide">
+                        {{-- <li class="dropdown full-width dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                 data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Pages
                                 <span class="tf-ion-ios-arrow-down"></span></a>
@@ -216,18 +237,19 @@
                                     <!-- Mega Menu -->
                                     <div class="col-sm-3 col-xs-12">
                                         <a href="shop.html">
-                                            <img class="img-responsive" src="{{url('/frontend/assets/images/shop/header-img.jpg')}}"
+                                            <img class="img-responsive"
+                                                src="{{ url('/frontend/assets/images/shop/header-img.jpg') }}"
                                                 alt="menu image" />
                                         </a>
                                     </div>
                                 </div><!-- / .row -->
                             </div><!-- / .dropdown-menu -->
-                        </li><!-- / Pages -->
+                        </li><!-- / Pages --> --}}
 
 
 
                         <!-- Blog -->
-                        <li class="dropdown dropdown-slide">
+                        {{-- <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                 data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Blog
                                 <span class="tf-ion-ios-arrow-down"></span></a>
@@ -238,19 +260,10 @@
                                 <li><a href="blog-grid.html">Blog 2 Columns</a></li>
                                 <li><a href="blog-single.html">Blog Single</a></li>
                             </ul>
-                        </li><!-- / Blog -->
+                        </li><!-- / Blog --> --}}
 
-                        <!-- Shop -->
-                        <li class="dropdown dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Elements
-                                <span class="tf-ion-ios-arrow-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="buttons.html">Buttons</a></li>
-                                <li><a href="alerts.html">Alerts</a></li>
-                            </ul>
-                        </li><!-- / Blog -->
+
+
                     </ul><!-- / .nav .navbar-nav -->
 
                 </div>
