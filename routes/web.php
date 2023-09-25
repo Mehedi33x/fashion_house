@@ -4,16 +4,22 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\frontend\AuthController;
 use App\Http\Controllers\frontend\HomepageController;
 use App\Models\Deliverman;
 use Illuminate\Support\Facades\Route;
 
 //frontend
+Route::get('/login',[AuthController::class,'login'])->name('web.login');
+Route::get('/registration',[AuthController::class,'registration'])->name('web.registration');
+Route::post('/store_registration',[AuthController::class,'do_registration'])->name('web.do.registration');
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 
 Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
 Route::get('/product', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
+Route::get('/category-wise-products/{id}',[ProductController::class,'catProducts'])->name('web.catProducts');
+
 
 
 

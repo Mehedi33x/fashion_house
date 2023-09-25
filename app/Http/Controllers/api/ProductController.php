@@ -35,12 +35,15 @@ class ProductController extends Controller
     {
         // dd($request->all());
 
-        $validate = Validator::make($request->all(), [
-            'name' => 'required',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric|min:2',
-        ]);
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'category' => 'required',
+                'price' => 'required|numeric',
+                'stock' => 'required|numeric|min:2',
+            ]
+        );
 
         if ($validate->fails()) {
             return $this->responesewithError($validate->getMessageBag());
@@ -70,6 +73,16 @@ class ProductController extends Controller
     public function editProduct(Request $request, $id)
     {
         // dd($request->all());
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'category_id' => 'required',
+                'price' => 'required|numeric',
+                'stock' => 'required|numeric|min:2',
+                'status' => 'required',
+            ]
+        );
         $product = Product::find($id);
         if ($product) {
             $product->update([

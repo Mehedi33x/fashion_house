@@ -97,7 +97,7 @@
 
                         <!-- Login -->
                         <li class="">
-                            <a href="http://">Login</a>
+                            <a href="{{ route('web.login') }}">Login</a>
                         </li>
 
                     </ul><!-- / .nav .navbar-nav .navbar-right -->
@@ -136,7 +136,8 @@
                             <ul class="dropdown-menu">
                                 {{-- @dd($category) --}}
                                 @foreach ($category as $catData)
-                                    <li><a href="">{{ $catData->name }}</a></li>
+                                    <li><a href="{{ route('web.catProducts', $catData->id) }}">{{ $catData->name }}</a>
+                                    </li>
                                 @endforeach
 
                             </ul>

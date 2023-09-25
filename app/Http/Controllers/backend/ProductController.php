@@ -11,17 +11,20 @@ use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
 {
+    //backend
+    //product list
     public function product_list()
     {
         $product = Product::with('catData')->paginate(5);
         return view('backend.pages.product.product_list', compact('product'));
     }
-
+    //product add
     public function product_add()
     {
         $category = Category::get();
         return view('backend.pages.product.add_product', compact('category'));
     }
+    //product store
     public function product_store(Request $request)
     {
         // dd($request->all());
@@ -54,7 +57,7 @@ class ProductController extends Controller
         return to_route('product.list');
     }
 
-    //product view
+    //single product view
     public function product_view($id)
     {
         $product = Product::findOrFail($id);
@@ -72,14 +75,27 @@ class ProductController extends Controller
 
 
     //frontend
-    //all-products
+
+    //all-products view
     public function allProducts()
     {
-        $allProducts = Product::all();
+        $allProducts = Product::with('catData')->latest()->get();
         return view('frontend.pages.product.all_products', compact('allProducts'));
     }
+    //single product view
     public function singleProduct()
     {
         return view('frontend.pages.product.single_product');
+    }
+
+    //category wise product view
+    public function catProducts($id)
+    {
+        $product = Product::with('catData')->latest()->where('category_id', $id)->get();
+        // $product = Category::with('catProducts')->find($id)->get();
+
+        // dd($product);
+        // dd($product->toArray());
+        return view('frontend.pages.product.category_wiseProduct', compact('product'));
     }
 }

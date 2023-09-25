@@ -31,12 +31,12 @@
         <section class="products section">
             <div class="container">
                 <div class="row">
-                    @foreach ($allProducts as $product)
+                    @foreach ($product as $data)
                         <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-thumb">
                                     <img style="height:450px;width:360px" class="img-responsive"
-                                        src="{{ url('/uploads/product/', $product->image) }}" alt="product-img" />
+                                        src="{{ url('/uploads/product', $data->image) }}" alt="product-img" />
                                     <div class="preview-meta">
                                         <ul>
                                             <li>
@@ -54,10 +54,9 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h4><a href="{{ route('web.singleproduct') }}">Product Name: {{ $product->name }}</a>
-                                    </h4>
-                                    <h4>Category: {{ $product->catData->name }}</h4>
-                                    <p class="price">Price: {{ $product->price }} BDT</p>
+                                    <h4><a href="">Product Name: {{ $data->name }}</a></h4>
+                                    {{-- <h4>Category: {{ $data->catProducts->name }}</h4> --}}
+                                    <p class="price">Price: {{ $data->price }} BDT</p>
                                 </div>
                             </div>
                         </div>
