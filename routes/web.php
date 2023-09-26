@@ -10,15 +10,16 @@ use App\Models\Deliverman;
 use Illuminate\Support\Facades\Route;
 
 //frontend
-Route::get('/login',[AuthController::class,'login'])->name('web.login');
-Route::get('/registration',[AuthController::class,'registration'])->name('web.registration');
-Route::post('/store_registration',[AuthController::class,'do_registration'])->name('web.do.registration');
+Route::get('/login', [AuthController::class, 'login'])->name('web.login');
+Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
+Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
+Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 
 Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
 Route::get('/product', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
-Route::get('/category-wise-products/{id}',[ProductController::class,'catProducts'])->name('web.catProducts');
+Route::get('/category-wise-products/{id}', [ProductController::class, 'catProducts'])->name('web.catProducts');
 
 
 

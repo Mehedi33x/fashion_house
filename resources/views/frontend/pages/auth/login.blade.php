@@ -10,12 +10,19 @@
                                 <img src="images/logo.png" alt="">
                             </a>
                             <h2 class="text-center">Login</h2>
-                            <form class="text-left clearfix" action="index.html">
+                            <form class="text-left clearfix" action="{{ route('web.do.login') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <div class="alert-danger">
+                                        {{ $errors->first('email') }}
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <div class="alert-danger">
+                                        {{ $errors->first('password') }}
+                                    </div>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-main text-center">Login</button>

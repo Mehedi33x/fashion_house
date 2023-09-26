@@ -30,12 +30,35 @@ class AuthController extends Controller
         // dd($request->all());
 
         User::create([
-            "name"=>$request->name,
-            "email"=>$request->email,
-            "password"=>bcrypt($request->password),
-            "role"=>'customer'
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => bcrypt($request->password),
+            "role" => 'customer'
         ]);
 
         return to_route('web.login');
+    }
+
+    public function do_login(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required|min:8",
+        ]);
+
+        $credentials = $request->except('_token');
+        // dd($credentials);
+        if (auth()->attempt($credentials)) {
+            dd('helo');
+            $user = auth()->user();
+            if ($user->role == 'customer') {
+                toastr()->success('Login successful','Success');
+                return to_route('homepage');
+            }
+        } else {
+            toastr()->error('Invalid Information', 'Error');
+            return to_route('web.login');
+        }
     }
 }

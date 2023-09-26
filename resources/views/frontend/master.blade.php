@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="{{ url('/frontend/assets/plugins/themefisher-font/style.css') }}">
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="{{ url('/frontend/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-
+    {{-- toastr --}}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!-- Animate css -->
     <link rel="stylesheet" href="{{ url('/frontend/assets/plugins/animate/animate.css') }}">
     <!-- Slick Carousel -->
@@ -129,6 +130,9 @@ Start Call To Action
     <!-- Main Js File -->
     <script src="{{ url('/frontend/assets/js/script.js') }}"></script>
 
+    // toastr
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
 
 </body>
