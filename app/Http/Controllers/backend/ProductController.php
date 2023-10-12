@@ -16,12 +16,14 @@ class ProductController extends Controller
     public function product_list()
     {
         $product = Product::with('catData')->paginate(5);
+        // dd($product);
         return view('backend.pages.product.product_list', compact('product'));
     }
     //product add
     public function product_add()
     {
         $category = Category::get();
+        // dd($category);
         return view('backend.pages.product.add_product', compact('category'));
     }
     //product store

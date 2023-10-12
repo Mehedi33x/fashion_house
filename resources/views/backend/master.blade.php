@@ -12,6 +12,8 @@
     {{-- //bootstrap CDN --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {{-- toastr --}}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     {{-- font awesome CDN --}}
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
@@ -24,6 +26,25 @@
 
     <link href="{{ url('backend/assets/css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    {{-- toastr style color fix --}}
+    {{-- <style>
+        #toast-container>.toast-error {
+            background-color: #BD362F;
+        }
+
+        .toast-success {
+            background-color: green;
+        }
+
+        .toast-info {
+            background-color: blue;
+        }
+
+        .toast-warning {
+            background-color: yellow;
+        }
+    </style> --}}
 </head>
 
 <body>
@@ -52,6 +73,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+
+    {{-- toastr --}}
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
+
+
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");

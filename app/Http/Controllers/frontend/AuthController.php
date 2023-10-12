@@ -25,7 +25,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required|min:4',
         ]);
         // dd($request->all());
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
             "password" => bcrypt($request->password),
             "role" => 'customer'
         ]);
-
+        toastr()->success('Registration succesful', 'Success');
         return to_route('web.login');
     }
 
@@ -44,16 +44,15 @@ class AuthController extends Controller
         // dd($request->all());
         $request->validate([
             "email" => "required|email",
-            "password" => "required|min:8",
+            "password" => "required|min:4",
         ]);
 
         $credentials = $request->except('_token');
         // dd($credentials);
         if (auth()->attempt($credentials)) {
-            dd('helo');
             $user = auth()->user();
             if ($user->role == 'customer') {
-                toastr()->success('Login successful','Success');
+                toastr()->success('Login successful', 'Success');
                 return to_route('homepage');
             }
         } else {

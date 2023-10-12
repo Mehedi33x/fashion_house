@@ -1,10 +1,10 @@
 @extends('backend.master')
 @section('content')
     <div class="">
-        <h2 style="font-size: 35px; margin-bottom:20px">Product List</h2>
+        <h2 style="font-size: 35px; margin-bottom:20px">Sub-Category List</h2>
         <hr>
         <div>
-            <a href="{{ route('product.add') }}" class="btn btn-success" style="margin-bottom: 20px">+ Product</a>
+            <a href="{{ route('subCat.add') }}" class="btn btn-success" style="margin-bottom: 20px">+ Sub-Category</a>
         </div>
         <table class="table table-bordered" style="border: 2px solid black">
             <thead class="table-dark">
@@ -12,27 +12,24 @@
                     <th scope="col">#</th>
                     <th scope="col">Image</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Stock</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($product as $key => $element)
+                @foreach ($subCat as $key => $item)
                     <tr>
-                        <th scope="row">{{ $product->firstitem() + $key }}</th>
+                        <th scope="row">{{ $subCat->firstitem() + $key }}</th>
                         <td>
-                            <img style="width: 80px;height:80px;" src="{{ url('/uploads/product', $element->image) }}"
+                            <img style="height: 80px;width:80px;" src="{{ url('/uploads/subCategory', $item->image) }}"
                                 alt="">
                         </td>
-                        <td>{{ $element->name }}</td>
-                        <td>{{ $element->catData->name }}</td>
-                        <td>{{ $element->price }} BDT</td>
-                        <td>{{ $element->stock }} units</td>
-                        <td class="text-capitalize">{{ $element->status }}</td>
-
+                        <td>{{ ucfirst($item->name) }}</td>
+                        <td>{{ ucfirst($item->category->name) }}</td>
+                        <td>{{ ucfirst($item->description) }}</td>
+                        <td class="text-capitalize">{{ $item->status }}</td>
                         <td>
                             <div class="container">
                                 <div class="dropdown">
@@ -41,10 +38,8 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('product.view', $element->id) }}"><i
-                                                class="fa fa-edit"></i>View</a>
-                                        <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>Edit</a>
-                                        <a class="dropdown-item" href="{{ route('product.delete', $element->id) }}"
+                                        <a class="dropdown-item" href="">View</a>
+                                        <a class="dropdown-item" href="{{ route('subCat.delete', $item->id) }}"
                                             onclick="return confirm('Are you sure to Delete?')"><i
                                                 class="fa-solid fa-trash"></i>Delete</a>
                                     </div>
@@ -53,8 +48,11 @@
                         </td>
                     </tr>
                 @endforeach
+
+
             </tbody>
         </table>
-        {{ $product->links() }}
+        <br>
+        {{ $subCat->links() }}
     </div>
 @endsection

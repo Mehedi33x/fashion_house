@@ -25,6 +25,17 @@
                     <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Category</span>
                 </a>
             </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('subCat.table') }}">
+                    <i class="align-middle" data-feather="check-square"></i> <span
+                        class="align-middle">Sub-Category</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('brand.list') }}">
+                    <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Brand</span>
+                </a>
+            </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="pages-sign-up.html">

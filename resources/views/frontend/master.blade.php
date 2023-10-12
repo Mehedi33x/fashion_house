@@ -130,7 +130,7 @@ Start Call To Action
     <!-- Main Js File -->
     <script src="{{ url('/frontend/assets/js/script.js') }}"></script>
 
-    // toastr
+    {{-- // toastr --}}
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
 
