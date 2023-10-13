@@ -36,7 +36,11 @@
                     <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Brand</span>
                 </a>
             </li>
-
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('userRole.table') }}">
+                    <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Role</span>
+                </a>
+            </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="pages-sign-up.html">
                     <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Users</span>

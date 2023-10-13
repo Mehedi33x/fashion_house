@@ -6,8 +6,10 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\backend\UserRoleController;
 use App\Http\Controllers\frontend\AuthController;
 use App\Http\Controllers\frontend\HomepageController;
+use App\Http\Controllers\UserRole;
 use App\Models\Deliverman;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/category_view/{id}', [CategoryController::class, 'categoryView'])->name('category.view');
     Route::get('/category_delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 
-
+    // subcat
     Route::get('/SubCategory', [SubCategoryController::class, 'ViewSubCat'])->name('subCat.table');
     Route::get('/add_sub-category', [SubCategoryController::class, 'addSubCat'])->name('subCat.add');
     Route::post('/store_sub-category', [SubCategoryController::class, 'storeSubCat'])->name('subCat.store');
@@ -58,6 +60,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/product_delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');
 
 
+    //User Role
+    Route::get('/user_role', [UserRoleController::class, 'userRole'])->name('userRole.table');
+    Route::get('/add_user_role', [UserRoleController::class, 'addUserRole'])->name('add.userRole.table');
+    Route::post('/store_user_role', [UserRoleController::class, 'storeUserRole'])->name('store.userRole.table');
+    Route::get('/assign_role',[UserRoleController::class,'assignRole'])->name('assign.role');
+
+
+
+
+    //delivery man
     Route::get('/deliverman_list', [DelivermanController::class, 'deliverManTable'])->name('deliverman.table');
     Route::get('/deliverman_add', [DelivermanController::class, 'delivermanAdd'])->name('deliverman.add');
     Route::post('/deliverman_store', [DelivermanController::class, 'delivermanStore'])->name('deliverman.store');
