@@ -64,7 +64,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/user_role', [UserRoleController::class, 'userRole'])->name('userRole.table');
     Route::get('/add_user_role', [UserRoleController::class, 'addUserRole'])->name('add.userRole.table');
     Route::post('/store_user_role', [UserRoleController::class, 'storeUserRole'])->name('store.userRole.table');
-    Route::get('/assign_role',[UserRoleController::class,'assignRole'])->name('assign.role');
+    Route::get('/assign_role/{id}',[UserRoleController::class,'assignRole'])->name('assign.role');
 
 
 

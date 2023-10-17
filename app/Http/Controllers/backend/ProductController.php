@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SubCategory;
 use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
@@ -24,7 +25,9 @@ class ProductController extends Controller
     {
         $category = Category::get();
         // dd($category);
-        return view('backend.pages.product.add_product', compact('category'));
+        $subCat = SubCategory::all()->where('category_id');
+        dd($subCat);
+        return view('backend.pages.product.add_product', compact('category', 'subCat'));
     }
     //product store
     public function product_store(Request $request)

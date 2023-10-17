@@ -21,7 +21,7 @@
                         <td>{{ $item->name }}</td>
                         <td>
                             <div>
-                                <a href="{{ route('assign.role') }}" class="btn btn-success">Assaign</a>
+                                <a href="{{ route('assign.role',$item->id) }}" class="btn btn-success">Assaign</a>
                             </div>
                         </td>
                     </tr>

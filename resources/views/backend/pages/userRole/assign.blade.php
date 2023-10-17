@@ -1,11 +1,10 @@
 @extends('backend.master')
 @section('content')
-{{-- <h1>Assign permission to role: {{ucfirst($role->name)}}</h1> --}}
-<body>
-    <div class="container mt-5">
-        <div class="row">
+    <div class="container mt-2 ">
+        <div class="row justify-content-center">
             <!-- Card 1 -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-5 mb-4" style="font-size: 20px">
+                <h2 style="font-size: 28px; margin-bottom:18px">Assign permission of : {{ $role->name }}</h2>
                 {{-- <form action="{{route('assign.permission',$role->id)}}" method="post"> --}}
                 <form action="" method="post">
                     @csrf
@@ -17,16 +16,16 @@
                                 Check all Permissions
                             </label>
                         </div>
+                        <hr>
                         <div class="card-footer">
-
                             @foreach ($permissions as $permission)
-                            <div class="form-check">
-                                <input name="permission[]" @if(in_array($permission->id,$assignedPermissions)) checked  @endif
-                                class="form-check-input" type="checkbox" value="{{$permission->id}}" id="checkbox1">
-                                <label class="form-check-label" for="checkbox1">
-                                    {{ ucfirst($permission->name) }}
-                                </label>
-                            </div>
+                                <div class="form-check">
+                                    <input name="" class="form-check-input" type="checkbox" value=""
+                                        id="checkbox1">
+                                    <label class="form-check-label" for="checkbox1">
+                                        {{ Str::ucfirst($permission->name) }}
+                                    </label>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -35,4 +34,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

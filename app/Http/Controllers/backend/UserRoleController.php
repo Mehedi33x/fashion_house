@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,8 +33,12 @@ class UserRoleController extends Controller
         return to_route('userRole.table');
     }
 
-    public function assignRole(){
-        return view('backend.pages.userRole.assign');
+    public function assignRole($id){
+        $role=Role::find($id);
+        // $role=Role::with('permissions')->find($id);
+        $permissions=Permission::all();
+        // dd($permissions);
+        return view('backend.pages.userRole.assign',compact('permissions','role'));
     }
 
 

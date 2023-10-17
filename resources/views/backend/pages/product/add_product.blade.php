@@ -26,6 +26,17 @@
                     {{ $errors->first('category') }}
                 </div>
             </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    @foreach ($category as $element)
+                        <option value="{{ $element->id }}">{{ $element->name }}</option>
+                    @endforeach
+                </select>
+                <div class="alert-danger">
+                    {{ $errors->first('category') }}
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="price">Price:</label>

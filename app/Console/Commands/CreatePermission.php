@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Permission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,16 @@ class CreatePermission extends Command
      */
     public function handle()
     {
-        // $allRoutes = Route::getRoutes();
+        $allRoutes = Route::getRoutes();
         // dd($allRoutes);
+        foreach($allRoutes as $route){
+            if($route->getPrefix()=='/admin')
+            Permission::updateOrCreate([
+                'name' => str_replace(".", " ", $route->getName()),
+                'slug' => $route->getName(),
+            ]);
+        }
+        echo "all permission store successfully.";
     }
-}
+    }
+
