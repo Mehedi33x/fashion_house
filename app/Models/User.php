@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = [];
-
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -6,6 +6,7 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\UserRoleController;
 use App\Http\Controllers\frontend\AuthController;
 use App\Http\Controllers\frontend\HomepageController;
@@ -59,6 +60,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/product_view/{id}', [ProductController::class, 'product_view'])->name('product.view');
     Route::get('/product_delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');
 
+    // User
+    Route::get('/user_table',[UserController::class,'userTable'])->name('user.table');
+    Route::get('/add_user',[UserController::class,'addUser'])->name('add.user');
+    Route::post('/store_user',[UserController::class,'storeUser'])->name('store.user');
 
     //User Role
     Route::get('/user_role', [UserRoleController::class, 'userRole'])->name('userRole.table');

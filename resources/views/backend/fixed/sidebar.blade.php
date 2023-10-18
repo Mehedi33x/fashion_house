@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-up.html">
+                <a class="sidebar-link" href="{{route('user.table')}}">
                     <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Users</span>
                 </a>
             </li>
