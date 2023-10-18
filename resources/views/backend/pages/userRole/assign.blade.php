@@ -6,7 +6,7 @@
             <div class="col-md-5 mb-4" style="font-size: 20px">
                 <h2 style="font-size: 28px; margin-bottom:18px">Assign permission of : {{ $role->name }}</h2>
                 {{-- <form action="{{route('assign.permission',$role->id)}}" method="post"> --}}
-                <form action="" method="post">
+                <form action="{{ route('submit.role.permission', $role->id) }}" method="post">
                     @csrf
                     <div class="card">
                         {{-- <div class="card-header">Card 1</div> --}}
@@ -20,7 +20,8 @@
                         <div class="card-footer">
                             @foreach ($permissions as $permission)
                                 <div class="form-check">
-                                    <input name="" class="form-check-input" type="checkbox" value=""
+                                    <input name="permission[]" @if (in_array($permission->id, $assignPermission)) checked @endif
+                                        class="form-check-input" type="checkbox" value="{{ $permission->id }}"
                                         id="checkbox1">
                                     <label class="form-check-label" for="checkbox1">
                                         {{ Str::ucfirst($permission->name) }}
