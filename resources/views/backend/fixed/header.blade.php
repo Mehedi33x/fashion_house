@@ -6,15 +6,13 @@
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown"
-                    data-bs-toggle="dropdown">
+                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
                         <i class="align-middle" data-feather="bell"></i>
                         <span class="indicator">4</span>
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-                    aria-labelledby="alertsDropdown">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
                     <div class="dropdown-menu-header">
                         4 New Notifications
                     </div>
@@ -76,14 +74,12 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
-                    data-bs-toggle="dropdown">
+                <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
                         <i class="align-middle" data-feather="message-square"></i>
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-                    aria-labelledby="messagesDropdown">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
                     <div class="dropdown-menu-header">
                         <div class="position-relative">
                             4 New Messages
@@ -93,8 +89,8 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-5.jpg"
-                                        class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                                    <img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle"
+                                        alt="Vanessa Tucker">
                                 </div>
                                 <div class="col-10 ps-2">
                                     <div class="text-dark">Vanessa Tucker</div>
@@ -107,8 +103,8 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-2.jpg"
-                                        class="avatar img-fluid rounded-circle" alt="William Harris">
+                                    <img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle"
+                                        alt="William Harris">
                                 </div>
                                 <div class="col-10 ps-2">
                                     <div class="text-dark">William Harris</div>
@@ -121,7 +117,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="{{url('backend/assets/img/avatars/avatar-4.jpg')}}"
+                                    <img src="{{ url('backend/assets/img/avatars/avatar-4.jpg') }}"
                                         class="avatar img-fluid rounded-circle" alt="Christina Mason">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -135,7 +131,7 @@
                         <a href="#" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="{{url('backend/assets/img/avatars/avatar-3.jpg')}}"
+                                    <img src="{{ url('backend/assets/img/avatars/avatar-3.jpg') }}"
                                         class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
                                 </div>
                                 <div class="col-10 ps-2">
@@ -160,8 +156,9 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                     data-bs-toggle="dropdown">
-                    <img src="{{url('backend/assets/img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded me-1"
-                        alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                    <img src="{{ url('backend/assets/img/avatars/avatar.jpg') }}"
+                        class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles
+                        Hall</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
@@ -174,7 +171,7 @@
                     <a class="dropdown-item" href="#"><i class="align-middle me-1"
                             data-feather="help-circle"></i> Help Center</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="{{ route('admin.logout') }}">Log out</a>
                 </div>
             </li>
         </ul>

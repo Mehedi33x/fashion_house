@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\backend\BrandController;
-use App\Http\Controllers\backend\CategoryController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\backend\DelivermanController;
-use App\Http\Controllers\backend\ProductController;
-use App\Http\Controllers\backend\SubCategoryController;
-use App\Http\Controllers\backend\UserController;
-use App\Http\Controllers\backend\UserRoleController;
-use App\Http\Controllers\frontend\AuthController;
-use App\Http\Controllers\frontend\HomepageController;
-use App\Http\Controllers\UserRole;
 use App\Models\Deliverman;
+use App\Http\Controllers\UserRole;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\AuthController;
+use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\BrandController;
+use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\UserRoleController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\frontend\HomepageController;
+use App\Http\Controllers\backend\DelivermanController;
+use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\backend\AuthController as BackendAuthController;
 
 //frontend
 Route::get('/login', [AuthController::class, 'login'])->name('web.login');
@@ -30,9 +31,10 @@ Route::get('/category-wise-products/{id}', [ProductController::class, 'catProduc
 
 
 //backend
-
-Route::group(['prefix' => 'admin'], function () {
-
+Route::get('/admin_login', [AuthController::class, 'adminLogin'])->name('admin.login');
+Route::post('/admin_store', [AuthController::class, 'checkAdmin'])->name('admin.store');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('/admin_logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     //category
     Route::get('/category_list', [CategoryController::class, 'categoryTable'])->name('category.table');
@@ -61,9 +63,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/product_delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');
 
     // User
-    Route::get('/user_table',[UserController::class,'userTable'])->name('user.table');
-    Route::get('/add_user',[UserController::class,'addUser'])->name('add.user');
-    Route::post('/store_user',[UserController::class,'storeUser'])->name('store.user');
+    Route::get('/user_table', [UserController::class, 'userTable'])->name('user.table');
+    Route::get('/add_user', [UserController::class, 'addUser'])->name('add.user');
+    Route::post('/store_user', [UserController::class, 'storeUser'])->name('store.user');
 
     //User Role
     Route::get('/user_role', [UserRoleController::class, 'userRole'])->name('userRole.table');
