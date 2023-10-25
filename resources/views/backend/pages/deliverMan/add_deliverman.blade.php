@@ -15,6 +15,14 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="role_id">User Role:</label>
+                <select id="role_id" name="role_id" required>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="contact">Contact:</label>
                 <input type="tel" id="contact" name="contact" required>
                 <div class="alert-danger">
@@ -35,6 +43,7 @@
                     {{ $errors->first('address') }}
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="image">Image:</label>
                 <input type="file" id="image" name="image">

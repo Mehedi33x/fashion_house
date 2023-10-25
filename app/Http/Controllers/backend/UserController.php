@@ -47,4 +47,32 @@ class UserController extends Controller
         ]);
         return to_route('user.table');
     }
+
+    public function profileUser(){
+        return view('backend.pages.user.user_profile');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

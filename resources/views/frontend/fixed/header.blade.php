@@ -84,7 +84,7 @@
                         </li><!-- / Cart -->
 
                         <!-- Search -->
-                        <li class="dropdown search dropdown-slide">
+                        {{-- <li class="dropdown search dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                     class="tf-ion-ios-search-strong"></i> Search</a>
                             <ul class="dropdown-menu search-dropdown">
@@ -93,12 +93,33 @@
                                             placeholder="Search..."></form>
                                 </li>
                             </ul>
-                        </li><!-- / Search -->
+                        </li> --}}
+                        <!-- / Search -->
 
                         <!-- Login -->
-                        <li class="">
-                            <a href="{{ route('web.login') }}">Login</a>
-                        </li>
+                        @if (auth()
+                                ?->guard('customer')
+                                ?->check())
+                            <!-- Example single danger button -->
+                            <div class="btn-group">
+                                <li class="dropdown dropdown-slide">
+                                    <a href="#!" class="dropdown-toggle btn btn-main" data-toggle="dropdown"
+                                        data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true"
+                                        aria-expanded="false">{{ auth('customer')->user()->name }}
+                                        <span class="tf-ion-ios-arrow-down"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ route('web.logout') }}">Logout</a></li>
+
+
+                                    </ul>
+                                </li>
+                            </div>
+                        @else
+                            <li class="">
+                                <a href="{{ route('web.login') }}">Login</a>
+                            </li>
+                        @endif
+
 
                     </ul><!-- / .nav .navbar-nav .navbar-right -->
                 </div>
@@ -110,8 +131,8 @@
             <div class="container">
                 <div class="navbar-header">
                     <h2 class="menu-title">Main Menu</h2>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>

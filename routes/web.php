@@ -13,13 +13,14 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\frontend\HomepageController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\SubCategoryController;
-use App\Http\Controllers\backend\AuthController as BackendAuthController;
+// use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
 
 //frontend
 Route::get('/login', [AuthController::class, 'login'])->name('web.login');
 Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
 Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
 Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
+Route::get('/logout',[AuthController::class,'do_logout'])->name('web.logout');
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 
@@ -36,6 +37,7 @@ Route::post('/admin_store', [AuthController::class, 'checkAdmin'])->name('admin.
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/admin_logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+
     //category
     Route::get('/category_list', [CategoryController::class, 'categoryTable'])->name('category.table');
     Route::get('/category_add', [CategoryController::class, 'categoryAdd'])->name('category.add');
@@ -66,6 +68,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/user_table', [UserController::class, 'userTable'])->name('user.table');
     Route::get('/add_user', [UserController::class, 'addUser'])->name('add.user');
     Route::post('/store_user', [UserController::class, 'storeUser'])->name('store.user');
+    Route::get('/user_profile', [UserController::class, 'profileUser'])->name('profile.user');
 
     //User Role
     Route::get('/user_role', [UserRoleController::class, 'userRole'])->name('userRole.table');

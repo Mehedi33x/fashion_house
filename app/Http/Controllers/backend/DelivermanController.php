@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\Role;
 use App\Models\Deliverman;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class DelivermanController extends Controller
     //deliverman add form
     public function delivermanAdd()
     {
-        return view('backend.pages.deliverMan.add_deliverman');
+        $roles=Role::all();
+        // $roles=Role::where('id','2');
+        // dd($roles);
+        return view('backend.pages.deliverMan.add_deliverman',compact('roles'));
     }
 
     //deliverman create

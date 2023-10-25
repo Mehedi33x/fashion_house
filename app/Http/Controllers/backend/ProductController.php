@@ -25,9 +25,9 @@ class ProductController extends Controller
     {
         $category = Category::get();
         // dd($category);
-        $subCat = SubCategory::all()->where('category_id');
-        dd($subCat);
-        return view('backend.pages.product.add_product', compact('category', 'subCat'));
+        // $subCat = SubCategory::all()->where('category_id');
+        // dd($subCat);
+        return view('backend.pages.product.add_product', compact('category', ));
     }
     //product store
     public function product_store(Request $request)

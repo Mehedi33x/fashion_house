@@ -157,11 +157,10 @@
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                     data-bs-toggle="dropdown">
                     <img src="{{ url('backend/assets/img/avatars/avatar.jpg') }}"
-                        class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles
-                        Hall</span>
+                        class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{auth()->user()->name}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
+                    <a class="dropdown-item" href="{{ route('profile.user') }}"><i class="align-middle me-1"
                             data-feather="user"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="align-middle me-1"
                             data-feather="pie-chart"></i> Analytics</a>
