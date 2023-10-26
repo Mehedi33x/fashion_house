@@ -4,7 +4,7 @@
         <h2 style="font-size: 35px; margin-bottom:20px">Product List</h2>
         <hr>
         <div>
-        
+
             <a href="{{ route('product.add') }}" class="btn btn-success" style="margin-bottom: 20px">+ Product</a>
         </div>
         <table class="table table-bordered" style="border: 2px solid black">

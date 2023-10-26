@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,7 @@ class AuthController extends Controller
         // if ($validator->fails()) {
         //     $validator->getMessageBag();
         // }
-        dd($request->all());
+        // dd($request->all());
 
         $request->validate([
             'email' => 'required',
@@ -35,7 +36,7 @@ class AuthController extends Controller
         $credentials = $request->except('_token');
         // dd($credentials);
 
-        if (auth()->guard('customer')->attempt($credentials)) {
+        if (auth('web')->attempt($credentials)) {
             return to_route('dashboard');
         } else {
             return to_route('admin.login');
