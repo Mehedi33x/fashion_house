@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\Datatables;
 use App\Models\SubCategory;
 use GuzzleHttp\Handler\Proxy;
 
@@ -16,10 +17,26 @@ class ProductController extends Controller
     //product list
     public function product_list()
     {
-        $product = Product::with('catData')->paginate(5);
-        // dd($product);
-        return view('backend.pages.product.product_list', compact('product'));
+        return view('backend.pages.product.product_list');
     }
+    //yajraTable
+    public function product_yajratable()
+    {
+        dd("hello"); {
+            $data = Product::select('id', 'name', 'category_id', 'price', 'stock', 'description', 'status')->get();
+            dd($data);
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+
     //product add
     public function product_add()
     {
@@ -27,7 +44,7 @@ class ProductController extends Controller
         // dd($category);
         // $subCat = SubCategory::all()->where('category_id');
         // dd($subCat);
-        return view('backend.pages.product.add_product', compact('category', ));
+        return view('backend.pages.product.add_product', compact('category',));
     }
     //product store
     public function product_store(Request $request)

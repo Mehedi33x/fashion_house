@@ -67,14 +67,16 @@ class AuthController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:4',
         ]);
         // dd($request->all());
 
         Customer::create([
-            "name" => $request->name,
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
             "email" => $request->email,
             "password" => bcrypt($request->password),
             "role" => 'customer'

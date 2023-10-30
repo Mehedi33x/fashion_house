@@ -8,10 +8,10 @@
             <a href="{{ route('product.add') }}" class="btn btn-success" style="margin-bottom: 20px">+ Product</a>
         </div>
         <table class="table table-bordered" style="border: 2px solid black">
-            <thead class="table-dark">
+            <thead class="productTable">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Image</th>
+                    {{-- <th scope="col">Image</th> --}}
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
                     <th scope="col">Price</th>
@@ -21,41 +21,62 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($product as $key => $element)
-                    <tr>
-                        <th scope="row">{{ $product->firstitem() + $key }}</th>
-                        <td>
-                            <img style="width: 80px;height:80px;" src="{{ url('/uploads/product', $element->image) }}"
-                                alt="">
-                        </td>
-                        <td>{{ $element->name }}</td>
-                        <td>{{ $element->catData->name }}</td>
-                        <td>{{ $element->price }} BDT</td>
-                        <td>{{ $element->stock }} units</td>
-                        <td class="text-capitalize">{{ $element->status }}</td>
 
-                        <td>
-                            <div class="container">
-                                <div class="dropdown">
-                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('product.view', $element->id) }}"><i
-                                                class="fa fa-edit"></i>View</a>
-                                        <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>Edit</a>
-                                        <a class="dropdown-item" href="{{ route('product.delete', $element->id) }}"
-                                            onclick="return confirm('Are you sure to Delete?')"><i
-                                                class="fa-solid fa-trash"></i>Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
             </tbody>
         </table>
-        {{ $product->links() }}
     </div>
 @endsection
+
+@push('ajaxjs')
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+
+            var table = $('.productTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('product.yajratable') }}",
+                columns: [
+                    // database clm name || view clm name
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'category_id',
+                        name: 'category_id'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
+                    },
+                    {
+                        data: 'stock',
+                        name: 'stock'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+
+        }); <
+        /script>
+    @endpush

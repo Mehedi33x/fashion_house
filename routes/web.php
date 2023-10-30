@@ -20,7 +20,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('web.login');
 Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
 Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
 Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
-Route::get('/logout',[AuthController::class,'do_logout'])->name('web.logout');
+Route::get('/logout', [AuthController::class, 'do_logout'])->name('web.logout');
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 
@@ -59,10 +59,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     //products
     Route::get('/product_list', [ProductController::class, 'product_list'])->name('product.list');
+    Route::get('/product_yajratable', [ProductController::class, 'product_yajratable'])->name('product.yajratable');
     Route::get('/product_add', [ProductController::class, 'product_add'])->name('product.add');
     Route::post('/product_store', [ProductController::class, 'product_store'])->name('product.store');
     Route::get('/product_view/{id}', [ProductController::class, 'product_view'])->name('product.view');
     Route::get('/product_delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');
+
 
     // User
     Route::get('/user_table', [UserController::class, 'userTable'])->name('user.table');

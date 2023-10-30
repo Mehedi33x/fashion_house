@@ -105,7 +105,7 @@
                                 <li class="dropdown dropdown-slide">
                                     <a href="#!" class="dropdown-toggle btn btn-main" data-toggle="dropdown"
                                         data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true"
-                                        aria-expanded="false">{{ auth('customer')->user()->name }}
+                                        aria-expanded="false">{{ auth('customer')->user()->fullname }}
                                         <span class="tf-ion-ios-arrow-down"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ route('web.logout') }}">Logout</a></li>

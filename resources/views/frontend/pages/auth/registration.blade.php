@@ -12,9 +12,15 @@
                         <form class="text-left clearfix" action="{{ route('web.do.registration') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" name="name" placeholder="Username">
+                                <input type="text" class="form-control" name="first_name" placeholder="First Name">
                                 <div class="alert-danger">
-                                    {{ $errors->first('name') }}
+                                    {{ $errors->first('first_name') }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                                <div class="alert-danger">
+                                    {{ $errors->first('last_name') }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -34,7 +40,7 @@
                             </div>
                         </form>
                         <p class="mt-20">Already hava an account ?<a href="{{ route('web.login') }}"> Login</a></p>
-                        <p><a href="forget-password.html"> Forgot your password?</a></p>
+
                     </div>
                 </div>
             </div>
