@@ -21,6 +21,7 @@
                                     <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
                                         <text id="AVIATO">
                                             <tspan x="108.94" y="325">AVIATO</tspan>
+
                                         </text>
                                     </g>
                                 </g>
@@ -119,8 +120,6 @@
                                 <a href="{{ route('web.login') }}">Login</a>
                             </li>
                         @endif
-
-
                     </ul><!-- / .nav .navbar-nav .navbar-right -->
                 </div>
             </div>
@@ -129,17 +128,17 @@
     <section class="menu">
         <nav class="navbar navigation">
             <div class="container">
-                <div class="navbar-header">
+                {{-- <div class="navbar-header">
                     <h2 class="menu-title">Main Menu</h2>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
-                </div><!-- / .navbar-header -->
+                </div> --}}
+                <!-- / .navbar-header -->
 
                 <!-- Navbar Links -->
                 <div id="navbar" class="navbar-collapse collapse text-center">
@@ -170,7 +169,7 @@
                             <a href="">About Us</a>
                         </li>
                         <li>
-                            <a href="">Conatcat</a>
+                            <a href="">Contact</a>
                         </li>
 
 

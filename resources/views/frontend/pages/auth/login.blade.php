@@ -28,7 +28,7 @@
                                     <button type="submit" class="btn btn-main text-center">Login</button>
                                 </div>
                             </form>
-                            <p class="mt-20"><a href="forget-password.html"> Forgot your password?</a></p>
+                            <p class="mt-20"><a href="{{ route('web.forget.password') }}"> Forgot your password?</a></p>
                             <p class="mt-20">New in this site ?<a href="{{ route('web.registration') }}"> Create New
                                     Account</a></p>
                         </div>

@@ -12,6 +12,8 @@ class Customer extends Authenticatable
     use HasFactory;
     use Notifiable;
     protected $guarded = [];
+
+    #(get)+habijabi+(attribute)
     public function getFullNameAttribute()
     {
         // return "Hello";
@@ -19,11 +21,11 @@ class Customer extends Authenticatable
     }
     public function setFirstNameAttribute($firstName)
     {
-        return $this->attributes["first_name"] = ucfirst($firstName);
+        return $this->attributes["first_name"] = mb_convert_case($firstName, MB_CASE_TITLE, "UTF-8");
     }
     public function setLastNameAttribute($lastName)
     {
-        return $this->attributes["last_name"] = ucfirst($lastName);
+        return $this->attributes["last_name"] = mb_convert_case($lastName, MB_CASE_TITLE, "UTF-8");
     }
     public function setEmailAttribute($email)
     {

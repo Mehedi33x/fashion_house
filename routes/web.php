@@ -20,6 +20,11 @@ Route::get('/login', [AuthController::class, 'login'])->name('web.login');
 Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
 Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
 Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
+
+Route::get('/forget_password', [AuthController::class, 'forget_password'])->name('web.forget.password');
+Route::post('/reset_link', [AuthController::class, 'reset_link'])->name('web.forget.password.link');
+Route::post('/password_reset/{token}', [AuthController::class, 'passwordResetMail'])->name('web.password.mail');
+
 Route::get('/logout', [AuthController::class, 'do_logout'])->name('web.logout');
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 

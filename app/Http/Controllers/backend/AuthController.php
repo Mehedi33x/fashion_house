@@ -4,9 +4,13 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ResetPasswordMail;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -56,6 +60,7 @@ class AuthController extends Controller
     public function login()
     {
         return view('frontend.pages.auth.login');
+        // return view('frontend.pages.auth.reset_mail');
     }
     #customer reg
     public function registration()
@@ -73,7 +78,7 @@ class AuthController extends Controller
             'password' => 'required|min:4',
         ]);
         // dd($request->all());
-
+        // firstname// first_name//firstName//Firstname//
         Customer::create([
             "first_name" => $request->first_name,
             "last_name" => $request->last_name,
@@ -113,5 +118,42 @@ class AuthController extends Controller
         auth()->guard('customer')->logout();
         Session::flush();
         return to_route('homepage');
+    }
+    public function forget_password()
+    {
+        return view('frontend.pages.auth.forget_password');
+    }
+    public function reset_link(Request $request)
+    {
+        // dd($request->all());
+        $validate = Validator::make($request->all(), [
+            'email' => 'reqired|email',
+        ]);
+        // dd($validate);
+        /* if ($validate->fails()) {
+            Toastr::error('Error', 'Invalid Credentials');
+            // toastr()->error($validate->getMessageBag());
+            return redirect()->back();
+        } else {
+            dd("Hello");
+        } */
+        #else part
+        $customer = Customer::where('email', $request->email)->first();
+        // dd($customer);
+        if ($customer) {
+            $token = Str::random(64);
+            $link = route('web.password.mail', $token);
+            // dd($link);
+            $customer->update([
+                'remember_token' => $token,
+            ]);
+            // dd("email");
+            Mail::to($customer->email)->send(new ResetPasswordMail($link));
+            toastr()->success("Reset Link sent to your email");
+            return redirect()->back();
+        } else {
+            toastr()->error("No user found by this email");
+            return redirect()->back();
+        }
     }
 }
