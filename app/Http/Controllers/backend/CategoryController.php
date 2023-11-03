@@ -11,8 +11,8 @@ class CategoryController extends Controller
     //category_table
     public function categoryTable()
     {
-        
-        return view('backend.pages.category.category');
+        $category=Category::paginate(5);
+        return view('backend.pages.category.category',compact('category'));
     }
     //category_create_form
     public function categoryAdd()

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Mail\ResetPasswordMail;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -112,13 +113,14 @@ class AuthController extends Controller
         }
     }
 
-
+    #customer_logout
     public function do_logout()
     {
         auth()->guard('customer')->logout();
         Session::flush();
         return to_route('homepage');
     }
+    #forget_password
     public function forget_password()
     {
         return view('frontend.pages.auth.forget_password');
@@ -145,7 +147,8 @@ class AuthController extends Controller
             $link = route('web.password.mail', $token);
             // dd($link);
             $customer->update([
-                'remember_token' => $token,
+                'token' => $token,
+                'token_expired_at' => Carbon::now()->addMinutes(5),
             ]);
             // dd("email");
             Mail::to($customer->email)->send(new ResetPasswordMail($link));
@@ -154,6 +157,47 @@ class AuthController extends Controller
         } else {
             toastr()->error("No user found by this email");
             return redirect()->back();
+        }
+    }
+    #customer_mail_logic
+    public function passwordResetMail($token)
+    {
+        $customer = Customer::where('token', $token)->whereDate('token_expired_at', '=', now())->whereTime('token_expired_at', '>=', now())->first();
+        // dd($customer);
+        if ($customer) {
+            //    dd("ok");
+            return view('frontend.pages.auth.pass_reset_form', compact('token'));
+        } else {
+            toastr()->error('Token may Invalid or Expired.Please try again.');
+            return to_route('web.forget.password');
+        }
+    }
+    public function resetPassword(Request $request, $token)
+    {
+        // dd($token);
+        // dd($request->all());
+        $validate = Validator::make($request->all(), [
+            #notWrk
+            // 'password' => 'required|min:4|confirmed',
+            #wrk
+            'password' => 'min:4',
+            'password_confirmation' => 'required_with:password|same:password',
+
+
+        ]);
+        // dd($validate);
+        if ($validate->fails()) {
+            toastr()->error($validate->getMessageBag());
+            return redirect()->back();
+        } else {
+            $customer = Customer::where('token', $token)->whereDate('token_expired_at', '=', now())->whereTime('token_expired_at', '>=', now())->first();
+            if ($customer) {
+                $customer->update([
+                    'password' => bcrypt($request->password),
+                ]);
+            }
+            toastr()->success('Password Reset Successfully');
+            return to_route('web.login');
         }
     }
 }

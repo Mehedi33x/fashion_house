@@ -58,7 +58,7 @@
                                                 </tr>
                                             </table>
                                             <p>
-                                                <a href="http://">{{ $reset_link }}</a>
+                                                <a href="{{ $reset_link }}">{{ $reset_link }}</a>
                                             </p>
                                             <p>For security, this request was received from a operating_system device
                                                 using browser_name. If you did not request a password reset, please
