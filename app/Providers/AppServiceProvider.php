@@ -24,13 +24,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-        $all_category=Category::all();
-        view()->share('category', $all_category);
+        // $all_category=Category::all();
+        // view()->share('category', $all_category);
 
-        // $all_category = [];
-        // if (Schema::hasTable('category')) {
-        //     $all_category = Category::all();
-        // }
-        // View::share('category', $all_category);
+        $all_category = [];
+        if (Schema::hasTable('categories')) {
+            $all_category = Category::all();
+        }
+        View::share('category', $all_category);
     }
 }

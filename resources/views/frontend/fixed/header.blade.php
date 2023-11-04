@@ -155,6 +155,7 @@
                                 <span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
                                 {{-- @dd($category) --}}
+
                                 @foreach ($category as $catData)
                                     <li><a href="{{ route('web.catProducts', $catData->id) }}">{{ $catData->name }}</a>
                                     </li>
