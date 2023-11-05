@@ -105,9 +105,11 @@ class ProductController extends Controller
         return view('frontend.pages.product.all_products', compact('allProducts'));
     }
     //single product view
-    public function singleProduct()
+    public function singleProduct($id)
     {
-        return view('frontend.pages.product.single_product');
+        $product= Product::with('catData')->find($id);
+        // dd($products);
+        return view('frontend.pages.product.single_product', compact('product'));
     }
 
     //category wise product view

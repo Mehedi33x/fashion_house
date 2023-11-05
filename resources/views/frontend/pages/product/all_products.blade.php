@@ -32,6 +32,7 @@
             <div class="container">
                 <div class="row">
                     @foreach ($allProducts as $product)
+                    {{-- @dd($allProducts) --}}
                         <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-thumb">
@@ -40,9 +41,8 @@
                                     <div class="preview-meta">
                                         <ul>
                                             <li>
-                                                <span data-toggle="modal" data-target="#product-modal">
-                                                    <i class="tf-ion-ios-search-strong"></i>
-                                                </span>
+                                                <a href="{{ route('web.singleproduct', $product->id) }}"><i
+                                                        class="tf-ion-ios-search-strong"></i></a>
                                             </li>
                                             <li>
                                                 <a href="#"><i class="tf-ion-ios-heart"></i></a>
@@ -54,10 +54,10 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h4><a href="{{ route('web.singleproduct') }}">Product Name: {{ $product->name }}</a>
+                                    <h4><a href="{{ route('web.singleproduct',$product->id) }}">Product Name: {{ $product->name }}</a>
                                     </h4>
                                     <h4>Category: {{ $product->catData->name }}</h4>
-                                    <p class="price">Price: {{ $product->price }} BDT</p>
+                                    <p class="price" style="color: black;">Price: {{ $product->price }} BDT</p>
                                 </div>
                             </div>
                         </div>

@@ -36,7 +36,7 @@ Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 #products
 Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
-Route::get('/product', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
+Route::get('/product/{id}', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
 Route::get('/category-wise-products/{id}', [ProductController::class, 'catProducts'])->name('web.catProducts');
 
 

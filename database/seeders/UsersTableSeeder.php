@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
         $admin = [
             ['name' => 'Mehedi', 'email' => 'mehedi@gmail.com', 'password' => bcrypt('12345'), 'role_id' => 1, 'image' => "C:\Users\User\Downloads\user.jpg"],
-            ['name' => 'Hasan', 'email' => 'admin1@gmail.com', 'password' => bcrypt('12345'), 'role_id' => 1, 'image' => "C:\Users\User\Downloads\user.jpg"]
+            ['name' => 'Hasan', 'email' => 'admin@gmail.com', 'password' => bcrypt('12345'), 'role_id' => 1, 'image' => "C:\Users\User\Downloads\user.jpg"]
         ];
         User::insert($admin);
     }
