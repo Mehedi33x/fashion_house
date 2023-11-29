@@ -13,31 +13,43 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\frontend\HomepageController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\frontend\CustomerController;
+use DebugBar\DataCollector\LocalizationCollector;
+
 // use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
 
-//frontend
-#login & registration
-Route::get('/login', [AuthController::class, 'login'])->name('web.login');
-Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
-Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
-Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
+#frontend
+Route::group(["middleware" => "locale"], function () {
+    #language change
+    Route::get('/languages/{lang}', [HomepageController::class, 'language'])->name('web.localization');
+    #login & registration
+    Route::get('/login', [AuthController::class, 'login'])->name('web.login');
+    Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
+    Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
+    Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
+    #login OTP
+    Route::get('/otp_form', [AuthController::class, 'otpForm'])->name('web.otp.form');
+    #password reset
+    Route::get('/forget_password', [AuthController::class, 'forget_password'])->name('web.forget.password');
+    Route::post('/reset_link', [AuthController::class, 'reset_link'])->name('web.forget.password.link');
+    Route::get('/password_reset/{token}', [AuthController::class, 'passwordResetMail'])->name('web.password.mail');
+    Route::post('/reset_password/{token}', [AuthController::class, 'resetPassword'])->name('web.reset.pass');
+    #logout
+    Route::get('/logout', [AuthController::class, 'do_logout'])->name('web.logout');
+    #homepage
+    Route::get('/', [HomepageController::class, 'home'])->name('homepage');
+    #products
+    Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
+    Route::get('/product/{id}', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
+    Route::get('/category-wise-products/{id}', [ProductController::class, 'catProducts'])->name('web.catProducts');
 
-#password reset
-Route::get('/forget_password', [AuthController::class, 'forget_password'])->name('web.forget.password');
-Route::post('/reset_link', [AuthController::class, 'reset_link'])->name('web.forget.password.link');
-Route::get('/password_reset/{token}', [AuthController::class, 'passwordResetMail'])->name('web.password.mail');
-Route::post('/reset_password/{token}', [AuthController::class, 'resetPassword'])->name('web.reset.pass');
 
-#logout
-Route::get('/logout', [AuthController::class, 'do_logout'])->name('web.logout');
+    #user
+    Route::get('/profile', [AuthController::class, 'profileView'])->name('web.profile.view');
+    Route::get('/edit-profile', [AuthController::class, 'profileEdit'])->name('web.profile.edit');
+    Route::put('/store-profile/{id}', [AuthController::class, 'profileStore'])->name('web.user_profile.store');
+});
 
-#homepage
-Route::get('/', [HomepageController::class, 'home'])->name('homepage');
-
-#products
-Route::get('/all-products', [ProductController::class, 'allProducts'])->name('web.allproducts');
-Route::get('/product/{id}', [ProductController::class, 'singleProduct'])->name('web.singleproduct');
-Route::get('/category-wise-products/{id}', [ProductController::class, 'catProducts'])->name('web.catProducts');
 
 
 

@@ -18,11 +18,14 @@ return new class extends Migration
             $table->string('last_name', 50);
             $table->string('role');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('contact', 50)->nullable();
             $table->text('address')->nullable();
             $table->string('status', 50)->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('otp',6)->nullable();
+            $table->timestamp('otp_expired_at')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->text('token')->nullable();
             $table->datetime('token_expired_at')->nullable();
             // $table->rememberToken();

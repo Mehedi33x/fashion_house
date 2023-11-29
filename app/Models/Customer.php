@@ -12,6 +12,10 @@ class Customer extends Authenticatable
     use HasFactory;
     use Notifiable;
     protected $guarded = [];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     #(get)+habijabi+(attribute)
     public function getFullNameAttribute()

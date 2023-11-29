@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -42,8 +43,10 @@ class AuthController extends Controller
         // dd($credentials);
 
         if (auth('web')->attempt($credentials)) {
+            Log::debug('User Login successfull with Email:' . $request->email);
             return to_route('dashboard');
         } else {
+            Log::debug('Someone tried to login with Email:' . $request->email);
             return to_route('admin.login');
         }
     }
@@ -60,6 +63,7 @@ class AuthController extends Controller
     #customer Login
     public function login()
     {
+
         return view('frontend.pages.auth.login');
         // return view('frontend.pages.auth.reset_mail');
     }
@@ -76,7 +80,7 @@ class AuthController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:4',
+            'password' => 'required|min:5',
         ]);
         // dd($request->all());
         // firstname// first_name//firstName//Firstname//
@@ -87,6 +91,7 @@ class AuthController extends Controller
             "password" => bcrypt($request->password),
             "role" => 'customer'
         ]);
+        Log::debug('User Registration successful with Email:' . $request->email);
         toastr()->success('Registration succesful', 'Success');
         return to_route('web.login');
     }
@@ -96,7 +101,7 @@ class AuthController extends Controller
         // dd($request->all());
         $request->validate([
             "email" => "required|email",
-            "password" => "required|min:4",
+            "password" => "required|min:5",
         ]);
         $credentials = $request->except('_token');
         // dd($credentials);
@@ -104,10 +109,12 @@ class AuthController extends Controller
             // $user = auth()->user();
             // if ($user->role == 'customer')
             {
+                Log::debug('User login with Email:' . $request->email);
                 toastr()->success('Login successful', 'Success');
                 return to_route('homepage');
             }
         } else {
+            Log::debug('User Login fail with Email:' . $request->email);
             toastr()->error('Invalid Information', 'Error');
             return to_route('web.login');
         }
@@ -198,6 +205,56 @@ class AuthController extends Controller
             }
             toastr()->success('Password Reset Successfully');
             return to_route('web.login');
+        }
+    }
+    public function profileView()
+    {
+        return view('frontend.pages.user.user_profile');
+    }
+    public function profileEdit()
+    {
+        return view('frontend.pages.user.edit_profile');
+    }
+    public function profileStore(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        // dd($customer);
+        // dd($request->all());
+        $validate = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'contact' => 'required',
+            'address' => 'required',
+            'password' => 'required|min:5',
+            'confirm_password' => 'required_with:password|same:password',
+            'image' => 'required|mimes:jpeg,jpg,png'
+        ]);
+        // dd($validate);
+        if ($validate->fails()) {
+            toastr()->error($validate->getMessageBag());
+            return redirect()->back();
+        } else {
+            $customer_image = '';
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $customer_image = 'IMG' . '-' . date('Ymdhsi') . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('/customer', $customer_image);
+            }
+            $customer->update([
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                'contact' => $request->contact,
+                "address" => $request->address,
+                "image" => $customer_image,
+                "password" => bcrypt($request->password),
+                "role" => 'customer',
+                "status" => 'active'
+            ]);
+            Log::debug('User profile update successful with Email:' . $request->email);
+            toastr()->success('Profile Update succesful', 'Success');
+            return to_route('web.profile.view');
         }
     }
 }

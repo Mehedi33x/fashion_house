@@ -32,13 +32,13 @@
             <div class="container">
                 <div class="row">
                     @foreach ($allProducts as $product)
-                    {{-- @dd($allProducts) --}}
+                        {{-- @dd($allProducts) --}}
                         <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-thumb">
                                     <img style="height:450px;width:360px" class="img-responsive"
                                         src="{{ url('/uploads/product/', $product->image) }}" alt="product-img" />
-                                    <div class="preview-meta">
+                                    {{-- <div class="preview-meta">
                                         <ul>
                                             <li>
                                                 <a href="{{ route('web.singleproduct', $product->id) }}"><i
@@ -51,10 +51,20 @@
                                                 <a href="#!"><i class="tf-ion-android-cart"></i></a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
+                                    <form action="">
+                                        <div class="preview-meta">
+                                            <ul>
+                                                <li>
+                                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="product-content">
-                                    <h4><a href="{{ route('web.singleproduct',$product->id) }}">Product Name: {{ $product->name }}</a>
+                                    <h4><a href="{{ route('web.singleproduct', $product->id) }}">Product Name:
+                                            {{ $product->name }}</a>
                                     </h4>
                                     <h4>Category: {{ $product->catData->name }}</h4>
                                     <p class="price" style="color: black;">Price: {{ $product->price }} BDT</p>

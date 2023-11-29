@@ -21,8 +21,7 @@
                                     <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
                                         <text id="AVIATO">
                                             {{-- <tspan x="108.94" y="325">AVIATO</tspan> --}}
-                                            <h2>Haat Bazar</h2>
-
+                                            <h2>{{ __('Haat_Bazar') }}</h2>
                                         </text>
                                     </g>
                                 </g>
@@ -32,7 +31,17 @@
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Cart -->
+
                     <ul class="top-menu text-right list-inline">
+                        {{-- <li class="commonSelect">
+                            <select class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                <option value="{{ route('web.localization', 'en') }}">ENGLISH</option>
+                                <option value="{{ route('web.localization', 'bn') }}">BN</option>
+                                <option value="{{ route('web.localization', 'ar') }}">AR</option>
+                                <option value="{{ route('web.localization', 'rs') }}">RS</option>
+                            </select>
+                        </li> --}}
+                        <!-- / Languages -->
                         <li class="dropdown cart-nav dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                     class="tf-ion-android-cart"></i>Cart</a>
@@ -99,6 +108,8 @@
                         <!-- / Search -->
 
                         <!-- Login -->
+
+
                         @if (auth()
                                 ?->guard('customer')
                                 ?->check())
@@ -110,6 +121,7 @@
                                         aria-expanded="false">{{ auth('customer')->user()->fullname }}
                                         <span class="tf-ion-ios-arrow-down"></span></a>
                                     <ul class="dropdown-menu">
+                                        <li><a href="{{ route('web.profile.view') }}">Profile</a></li>
                                         <li><a href="{{ route('web.logout') }}">Logout</a></li>
 
 
@@ -147,25 +159,27 @@
 
                         <!-- Home -->
                         <li class="dropdown ">
-                            <a href="{{ route('homepage') }}">Home</a>
+                            <a href="{{ route('homepage') }}">{{ __('Home') }}</a>
                         </li><!-- / Home -->
 
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Category
+                                data-delay="350" role="button" aria-haspopup="true"
+                                aria-expanded="false">{{ __('Category') }}
                                 <span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
                                 {{-- @dd($category) --}}
 
                                 @foreach ($category as $catData)
-                                    <li><a href="{{ route('web.catProducts', $catData->id) }}">{{ $catData->name }}</a>
+                                    <li><a
+                                            href="{{ route('web.catProducts', $catData->id) }}">{{ $catData->name }}</a>
                                     </li>
                                 @endforeach
 
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route('web.allproducts') }}">Products</a>
+                            <a href="{{ route('web.allproducts') }}">{{ __('Products') }}</a>
                         </li>
                         <li>
                             <a href="">About Us</a>
