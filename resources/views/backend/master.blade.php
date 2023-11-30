@@ -19,6 +19,7 @@
     {{-- toastr --}}
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     {{-- font awesome CDN --}}
+    <link rel="stylesheet" href="{{ url('fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">

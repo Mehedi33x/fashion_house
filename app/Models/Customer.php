@@ -35,4 +35,8 @@ class Customer extends Authenticatable
     {
         return $this->attributes["email"] = strtolower($email);
     }
+    public function setStatusAttribute($status)
+    {
+        return $this->attributes["status"] = strtolower($status);
+    }
 }

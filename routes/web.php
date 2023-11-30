@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\CustomerController;
 use App\Models\Deliverman;
 use App\Http\Controllers\UserRole;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,6 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\frontend\HomepageController;
 use App\Http\Controllers\backend\DelivermanController;
 use App\Http\Controllers\backend\SubCategoryController;
-use App\Http\Controllers\frontend\CustomerController;
 use DebugBar\DataCollector\LocalizationCollector;
 
 // use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
@@ -25,8 +25,12 @@ Route::group(["middleware" => "locale"], function () {
     #login & registration
     Route::get('/login', [AuthController::class, 'login'])->name('web.login');
     Route::get('/registration', [AuthController::class, 'registration'])->name('web.registration');
+    #Mail Verify
+    Route::get('/verification-mail/{token}', [AuthController::class, 'verifyMail'])->name('web.verify.mail');
+    // Route::get('/verifying-mail', [AuthController::class, 'verifyMail'])->name('web.verifying.mail');
     Route::post('/store_registration', [AuthController::class, 'do_registration'])->name('web.do.registration');
     Route::post('/do-login', [AuthController::class, 'do_login'])->name('web.do.login');
+
     #login OTP
     Route::get('/otp_form', [AuthController::class, 'otpForm'])->name('web.otp.form');
     #password reset
@@ -79,6 +83,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/add_brand', [BrandController::class, 'addBrand'])->name('brand.add');
     Route::post('/store_brand', [BrandController::class, 'storeBrand'])->name('brand.store');
 
+    Route::get('/customer-list', [CustomerController::class, 'customerList'])->name('customer.list');
+    Route::put('/customer-edit/{id}', [CustomerController::class, 'customerEdit'])->name('customer.edit');
 
     //products
     Route::get('/product_list', [ProductController::class, 'product_list'])->name('product.list');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Mail\CustomerVerifyMail;
 use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Str;
@@ -54,7 +55,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth('customer')->logout();
-        Session::flush();
         return to_route('admin.login');
     }
 
@@ -67,6 +67,9 @@ class AuthController extends Controller
         return view('frontend.pages.auth.login');
         // return view('frontend.pages.auth.reset_mail');
     }
+
+
+
     #customer reg
     public function registration()
     {
@@ -83,17 +86,46 @@ class AuthController extends Controller
             'password' => 'required|min:5',
         ]);
         // dd($request->all());
-        // firstname// first_name//firstName//Firstname//
-        Customer::create([
-            "first_name" => $request->first_name,
-            "last_name" => $request->last_name,
-            "email" => $request->email,
-            "password" => bcrypt($request->password),
-            "role" => 'customer'
-        ]);
-        Log::debug('User Registration successful with Email:' . $request->email);
-        toastr()->success('Registration succesful', 'Success');
-        return to_route('web.login');
+
+        $token = Str::random(64);
+        $link = Route('web.verify.mail', $token);
+        // dd($link);
+        $customer = Customer::where('email', $request->email)->first();
+        // dd($customer);
+        if ($customer) {
+            Log::debug('User try to registration with same email:' . $request->email);
+            toastr()->error('Already have an account');
+            return redirect()->back();
+        } else {
+            Customer::create([
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "password" => bcrypt($request->password),
+                "role" => 'customer',
+                "email_verify_token" => $token,
+            ]);
+            Mail::to($request->email)->send(new CustomerVerifyMail($link));
+            Log::debug('User Registration successful with Email:' . $request->email);
+            toastr()->success('Registration succesful', 'Success');
+            return to_route('web.login');
+        }
+    }
+    public function verifyMail($token)
+    {
+        // dd($token);
+        $checkVerify = Customer::where('email_verify_token', $token)->first();
+        // dd($checkVerify);
+        if ($checkVerify->email_verified_at == null) {
+            $checkVerify->update([
+                'email_verified_at' => now(),
+            ]);
+            toastr()->success('Email verification successful');
+            return to_route('web.login');
+        } else {
+            toastr()->error('Email verification failed');
+            return to_route('homepage');
+        }
     }
 
     public function do_login(Request $request)
@@ -108,14 +140,21 @@ class AuthController extends Controller
         if (auth()->guard('customer')->attempt($credentials)) {
             // $user = auth()->user();
             // if ($user->role == 'customer')
-            {
-                Log::debug('User login with Email:' . $request->email);
-                toastr()->success('Login successful', 'Success');
-                return to_route('homepage');
+            if (auth('customer')->user()->email_verified_at != null) {
+                if (auth('customer')->user()->status == 'active') {
+                    Log::debug('User login with Email:' . $request->email);
+                    toastr()->success('Login successful', 'Success');
+                    return to_route('homepage');
+                } else {
+                    auth('customer')->logout();
+                    toastr()->error('Your account has been suspended', 'Error');
+                    return redirect()->back();
+                }
             }
         } else {
+            auth('customer')->logout();
             Log::debug('User Login fail with Email:' . $request->email);
-            toastr()->error('Invalid Information', 'Error');
+            toastr()->error('Email not verified', 'Error');
             return to_route('web.login');
         }
     }
@@ -124,7 +163,6 @@ class AuthController extends Controller
     public function do_logout()
     {
         auth()->guard('customer')->logout();
-        Session::flush();
         return to_route('homepage');
     }
     #forget_password

@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="{{route('user.table')}}">
+                <a class="sidebar-link" href="{{ route('user.table') }}">
                     <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Users</span>
                 </a>
             </li>
@@ -53,11 +53,11 @@
                 </a>
             </li>
 
-            {{-- <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-in.html">
-                    <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('customer.list') }}">
+                    <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Customer List</span>
                 </a>
-            </li> --}}
+            </li>
 
 
 
