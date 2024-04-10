@@ -20,5 +20,6 @@
             <span class="data-label">Status:</span>
             <span class="data-value text-capitalize">{{ $category->status }}</span>
         </div>
+        
     </div>
 @endsection

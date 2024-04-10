@@ -70,13 +70,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/category_add', [CategoryController::class, 'categoryAdd'])->name('category.add');
     Route::post('/category_store', [CategoryController::class, 'categoryStore'])->name('category.store');
     Route::get('/category_view/{id}', [CategoryController::class, 'categoryView'])->name('category.view');
+    Route::get('/category_edit/{id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
+    Route::post('/category_update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
     Route::get('/category_delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 
     // subcat
-    Route::get('/SubCategory', [SubCategoryController::class, 'ViewSubCat'])->name('subCat.table');
-    Route::get('/add_sub-category', [SubCategoryController::class, 'addSubCat'])->name('subCat.add');
-    Route::post('/store_sub-category', [SubCategoryController::class, 'storeSubCat'])->name('subCat.store');
-    Route::get('/delete_sub-category/{id}', [SubCategoryController::class, 'deleteSubCat'])->name('subCat.delete');
+    // Route::get('/SubCategory', [SubCategoryController::class, 'ViewSubCat'])->name('subCat.table');
+    // Route::get('/add_sub-category', [SubCategoryController::class, 'addSubCat'])->name('subCat.add');
+    // Route::post('/store_sub-category', [SubCategoryController::class, 'storeSubCat'])->name('subCat.store');
+    // Route::get('/delete_sub-category/{id}', [SubCategoryController::class, 'deleteSubCat'])->name('subCat.delete');
 
     //brands
     Route::get('/brand', [BrandController::class, 'brandList'])->name('brand.list');

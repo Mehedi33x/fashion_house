@@ -12,7 +12,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="index.html">
+                        <a href="{{ route('homepage') }}">
                             <!-- replace logo here -->
                             <svg width="135px" height="29px" viewBox="0 0 155 29" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -21,7 +21,7 @@
                                     <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
                                         <text id="AVIATO">
                                             {{-- <tspan x="108.94" y="325">AVIATO</tspan> --}}
-                                            <h2>{{ __('Haat_Bazar') }}</h2>
+                                            <h2>Bazar Ghat</h2>
                                         </text>
                                     </g>
                                 </g>
@@ -110,9 +110,7 @@
                         <!-- Login -->
 
 
-                        @if (auth()
-                                ?->guard('customer')
-                                ?->check())
+                        @if (auth()?->guard('customer')?->check())
                             <!-- Example single danger button -->
                             <div class="btn-group">
                                 <li class="dropdown dropdown-slide">
@@ -170,9 +168,9 @@
                             <ul class="dropdown-menu">
                                 {{-- @dd($category) --}}
 
-                                @foreach ($category as $catData)
+                                @foreach ($category ?? '' as $catData)
                                     <li><a
-                                            href="{{ route('web.catProducts', $catData->id) }}">{{ $catData->name }}</a>
+                                            href="{{ route('web.catProducts', $catData->id ?? '') }}">{{ $catData->name }}</a>
                                     </li>
                                 @endforeach
 

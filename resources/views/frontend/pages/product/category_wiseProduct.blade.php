@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h4><a href="">Product Name: {{ $data->name }}</a></h4>
+                                    <h4><a href="">{{ $data->name }}</a></h4>
                                     {{-- <h4>Category: {{ $data->catProducts->name }}</h4> --}}
                                     <p class="price">Price: {{ $data->price }} BDT</p>
                                 </div>

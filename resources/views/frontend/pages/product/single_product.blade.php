@@ -92,46 +92,42 @@
                     <div class="single-product-details">
                         <h2>{{ $product->name }}</h2>
 
-                        <h4 class="product-price" style="color: black">Price: {{ $product->price }} BDT</h4>
-
-
-                        {{-- <div class="color-swatches">
-						<span>color:</span>
-						<ul>
-							<li>
-								<a href="#!" class="swatch-violet"></a>
-							</li>
-							<li>
-								<a href="#!" class="swatch-black"></a>
-							</li>
-							<li>
-								<a href="#!" class="swatch-cream"></a>
-							</li>
-						</ul>
-					</div> --}}
-
-                        {{-- <div class="product-size">
-						<span>Size:</span>
-						<select class="form-control">
-							<option>S</option>
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-						</select>
-					</div> --}}
-
+                        <div class="product-category">
+                            <span>Categories:</span>
+                            <ul>
+                                <li>{{ $product->catData->name }}</li>
+                            </ul>
+                        </div>
                         <div class="product-quantity">
-                            <span>Quantity:</span>
+                            <span>In Stock:</span>
                             <div class="product-quantity-slider">
                                 {{ $product->stock }}
                             </div>
                         </div>
-                        <div class="product-category">
-                            <span>Categories:</span>
+                        <div class="product-size">
+                            <span>Size:</span>
+                            <select class="form-control">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
+                        </div>
+                        <div class="color-swatches">
+                            <span>Color:</span>
                             <ul>
-                                <li><a href="product-single.html">{{ $product->catData->name }}</a></li>
+                                <li>
+                                    <a href="#!" class="swatch-violet"></a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="swatch-black"></a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="swatch-cream"></a>
+                                </li>
                             </ul>
                         </div>
+                        <h4 class="product-price mt-2" style="color: black">Price: {{ $product->price }} BDT</h4>
                         <a href="cart.html" class="btn btn-main mt-20">Add To Cart</a>
                     </div>
                 </div>
@@ -147,7 +143,7 @@
                         <div class="tab-content patternbg">
                             <div id="details" class="tab-pane fade active in">
                                 <h4>Product Description</h4>
-                                <p>{{$product->description}}</p>
+                                <p>{{ $product->description }}</p>
 
                             </div>
                             <div id="reviews" class="tab-pane fade">

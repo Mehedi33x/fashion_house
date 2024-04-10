@@ -36,7 +36,9 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                                         <a class="dropdown-item" href="{{ route('category.view', $element->id) }}">View</a>
+                                        <a class="dropdown-item" href="{{ route('category.edit', $element->id) }}">Edit</a>
                                         <a class="dropdown-item" href="{{ route('category.delete', $element->id) }}"
                                             onclick="return confirm('Are you sure to Delete?')"><i
                                                 class="fa-solid fa-trash"></i>Delete</a>

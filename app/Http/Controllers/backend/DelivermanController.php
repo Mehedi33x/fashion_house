@@ -13,17 +13,15 @@ class DelivermanController extends Controller
     //table
     public function deliverManTable()
     {
-        $deliverMan=Deliverman::paginate(5);
-        return view('backend.pages.deliverMan.deliveryMan_list',compact('deliverMan'));
+        $deliverMan = Deliverman::paginate(5);
+        return view('backend.pages.deliverMan.deliveryMan_list', compact('deliverMan'));
     }
 
     //deliverman add form
     public function delivermanAdd()
     {
-        $roles=Role::all();
-        // $roles=Role::where('id','2');
-        // dd($roles);
-        return view('backend.pages.deliverMan.add_deliverman',compact('roles'));
+        $roles = Role::whereNot('name', 'admin')->get();
+        return view('backend.pages.deliverMan.add_deliverman', compact('roles'));
     }
 
     //deliverman create
@@ -37,14 +35,13 @@ class DelivermanController extends Controller
             'address' => 'required',
         ]);
         // dd($request->all());
-
         Deliverman::create([
-            'id_no' => Str::random(5),
+            'id_no' => date('dmy') . '-' . Str::random(5),
             'name' => $request->name,
             'email' => $request->email,
             'contact' => $request->contact,
             'address' => $request->address,
-            'status'=>'active',
+            'status' => 'active',
         ]);
 
         return to_route('deliverman.table');

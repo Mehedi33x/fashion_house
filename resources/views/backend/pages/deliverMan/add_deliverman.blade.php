@@ -14,6 +14,7 @@
                     {{ $errors->first('name') }}
                 </div>
             </div>
+        
             <div class="form-group">
                 <label for="role_id">User Role:</label>
                 <select id="role_id" name="role_id" required>

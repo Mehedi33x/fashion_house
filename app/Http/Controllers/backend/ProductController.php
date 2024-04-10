@@ -21,10 +21,8 @@ class ProductController extends Controller
     }
     //yajraTable
     public function product_yajratable()
-    {
-        dd("hello"); {
+    { {
             $data = Product::select('id', 'name', 'category_id', 'price', 'stock', 'description', 'status')->get();
-            dd($data);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -40,16 +38,12 @@ class ProductController extends Controller
     //product add
     public function product_add()
     {
-        $category = Category::get();
-        // dd($category);
-        // $subCat = SubCategory::all()->where('category_id');
-        // dd($subCat);
+        $category = Category::where('status', 'active')->latest()->get();
         return view('backend.pages.product.add_product', compact('category',));
     }
     //product store
     public function product_store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -101,13 +95,13 @@ class ProductController extends Controller
     //all-products view
     public function allProducts()
     {
-        $allProducts = Product::with('catData')->latest()->get();
+        $allProducts = Product::with('catData')->where('status', 'active')->latest()->get();
         return view('frontend.pages.product.all_products', compact('allProducts'));
     }
     //single product view
     public function singleProduct($id)
     {
-        $product= Product::with('catData')->find($id);
+        $product = Product::with('catData')->find($id);
         // dd($products);
         return view('frontend.pages.product.single_product', compact('product'));
     }
